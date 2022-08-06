@@ -195,16 +195,40 @@ def ListarEstilos(matrizDesejada): #o parametro da func sera uma matriz, no caso
 def EstilosEmAlta(acessos): #acessos = listaAcessos da função ListarEstilos
     LerArquivo(acessos,'AcessosEstilos.txt')
     EmAlta = 0 #inicia vazia
+    contMaiores = 0 #inicia em 0
+    listaSemRepet = []
     if len(acessos) == 0: #com nenhum estilo no arquivo, não se pode fazer nada
-        print('Ainda não há estilos dados suficientes')
-    else:    
+        print('Ainda não há estilos suficientes')
+    else:
+        CondIgualdade = False    
         for i in range(len(acessos)): #começa do 1, pois o 0 é o inicializador da variavel
+            valid = False
             maior = acessos.count(EmAlta) #maior sera igual a qtd de vezes que o elemento em alta ira aparecer
             if maior < acessos.count(acessos[i]): #se aparecer mais vzs que o maior, o atual maior sera ele
                 EmAlta = acessos[i]
+            elif maior == acessos.count(acessos[i]):
+                for i in acessos:
+                    if i not in listaSemRepet:
+                        if listaSemRepet.count(i) == 0:
+                            listaSemRepet.append(i)
+                            valid = True
+                for i in listaSemRepet:
+                    if acessos.count(i) == maior and valid == True:    
+                        contMaiores += 1
+                if contMaiores == 1:
+                    CondIgualdade = False
+                elif contMaiores > 1:
+                    CondIgualdade = True
             else: #se não, o maior continua o msm
                 EmAlta = EmAlta
-        print('-'*47 + f'\nO estilo mais acessado recentemente foi: {EmAlta[0]} com {acessos.count(EmAlta)} acessos. Pode ser uma boa opção ver peças desse estilo!\n' + '-'*47)
+        if CondIgualdade == True:
+            print('-'*47 + '\nOs estilos mais acessados foram:')
+            for impress in range(len(listaSemRepet)):
+                for j in range(len(listaSemRepet)-1):
+                    print(listaSemRepet[impress][j])
+            print(f'Com {maior} acessos cada.')
+        else:    
+            print('-'*47 + f'\nO estilo mais acessado recentemente foi: {EmAlta[0]} com {acessos.count(EmAlta)} acessos. Pode ser uma boa opção ver peças desse estilo!\n' + '-'*47)
 
 #listar peças do guarda-roupa
 def ListarPecas(matrizOriginal): 
