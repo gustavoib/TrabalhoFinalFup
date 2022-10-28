@@ -1,2 +1,1 @@
-trabalho desenvolvido como modo de avaliação final do 1º semestre na disciplina de Fundamentos de Programação.
-trabalho feito em, unicamente, em python.
+Este projeto teve como objetivo criar um "guarda-roupa virtual" utilizando python e gerenciamento de arquivos. Este guarda-roupa contém diversas funções relacionadas às peças armazenadas: inserir, pesquisar, excluir e modificar são exemplos.
